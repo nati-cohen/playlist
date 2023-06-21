@@ -1,0 +1,23 @@
+
+.header {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background:rgb(66 83 94 / 88%);
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    flex-wrap: wrap;
+    height: 12% ;
+  }
+  
+  .header a {
+    width: 10%;
+  }
+  .logo {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 20%;
+  }

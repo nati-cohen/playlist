@@ -1,0 +1,39 @@
+.songContainer {
+   position: relative;
+   display: inline-flex;
+   flex-direction: column;
+   max-width: 20%;
+   height: auto;
+   cursor: context-menu;
+
+  
+ }
+ 
+ .playButton{
+   width: 10%;
+ }
+ 
+ .time{
+   padding-top: .5rem;
+   display: inline-flex;
+   gap: 1rem;
+ }
+ .img{
+   border-radius: 15px;
+   z-index: 1;
+ }
+ .title{
+  text-align: center;
+  align-items: center;
+ }
+
+ .like{
+  height: 13%;
+  width: 13%;
+  z-index: 3;
+  position: absolute;
+ right: 3%;
+ top: 3%;
+ color: brown;
+ 
+ }

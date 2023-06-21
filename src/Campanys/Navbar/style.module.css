@@ -1,0 +1,19 @@
+.nav{
+    width: 20%;
+    background:rgb(66 83 94 / 88%);
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    top: 12%;
+    left: 0;
+}
+.Navbarlist a {
+    list-style-type: none;
+    text-align: left;
+    font-size: xx-large;
+    text-decoration: none;
+    gap: 2rem;
+    color: rgba(236, 221, 221, 0.877);
+    padding: 10px;
+
+}

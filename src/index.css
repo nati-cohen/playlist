@@ -1,0 +1,13 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing:border-box;
+}
+body{
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Heebo', sans-serif;
+  /* background-image: url("https://cdn.pixabay.com/photo/2015/06/02/00/46/music-794506_1280.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat; */
+}

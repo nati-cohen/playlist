@@ -1,0 +1,25 @@
+.searchIcon {
+    cursor: pointer;
+    color: rgb(35, 152, 152);
+    transition: transform 1s ease;
+  }
+  
+  .searchIcon.rotated {
+    transform: rotate(360deg);
+  }
+  
+  .search {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1%;
+    margin: 0 auto;
+    position: fixed;
+   display: flex;
+
+  }
+  .search input[type="search"] {
+    border: none;
+  }
+  .search input[type="search"]:focus {
+    outline: none;
+  }

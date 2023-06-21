@@ -1,0 +1,47 @@
+.box{
+    background:rgb(66 83 94 / 88%);
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 10%;
+    width: 70%;
+    bottom: 0;
+    left: 25%;
+    z-index: 5;
+    border-radius: 20px;
+}
+
+.button{
+    color: antiquewhite;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+   
+}
+.img{
+   height: 20px;
+   width: 20px;
+}
+.video{
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    display: block;
+   
+}
+
+
+.volume{
+    display: flex;
+    gap: 1rem;
+}
+.play{
+    display: flex;
+    gap: 2rem;
+}
