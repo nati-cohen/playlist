@@ -17,6 +17,9 @@ function Navbar() {
         <li>
           <Link to="/likesongs">likesongs</Link>
         </li>
+        <li>
+          <Link to="/login">login</Link>
+        </li>
       </ul>
     </nav>
   )

@@ -1,0 +1,120 @@
+Here you can find instructions on how to make API calls to our server:
+
+Base URL: http://localhost:2023/api/
+
+1. Import the apiCalls.js file to your Component like this:
+    import api from '../Functions/API_Calls/apiCalls'
+
+2. You can now access POST, GET, PUT and DELETE:
+    api.post()
+    api.get()
+    api.put()
+    api.delete()
+
+    Pay attention to what arguments each one requests. 
+
+3. This replaces your regular Axios requests, and includes all error management. 
+
+GET:
+
+1. /items/allitems - get all the items in the database
+
+2. /items/:barcode - get an item by entering it's unique barcode. Remove the ":barcode" and enter the actual barcode instead.
+
+3. /orders/ - get all of the existing orders in the database 
+
+
+PUT: 
+1. /items/:barcode - update an item by entering it's unique barcode. Remove the ":barcode" and enter the actual barcode instead.
+
+2. /orders/:
+
+POST: 
+
+1. /items/additem - this is to add a new item to the database. Here is the JSON you can use for Postman:
+
+{
+    "name": "thisisanitem",
+    "img": "Put a URL Here",
+    "stock": "Number",
+    "price": "Number",
+    "barcode": "123abc"
+
+}
+
+2. /orders/addorder - this is how to add a new order to the database. Here is the JSON you can use for Postman:
+{
+    "user": {
+        "name": "String",
+        "phone": "Number",
+        "email": "String"
+    },
+    "status": {
+        "type": "String",
+        "default": "in_progress",
+        "enum": ["in_progress", "confirmed"]
+    },
+    "shipping": {
+        "type": "String",
+        "default": "regular",
+        "enum": ["regular", "express"]
+    },
+    "furniture": {
+        "type": "String",
+        "enum": ["Closet", "Bed", "Bookcase", "Table", "Console", "Drawers"],
+        "default": "Closet"
+    },
+    "interiorStyle": {
+        "color": { "type": "String", "required": true },
+        "shelves": {
+            "amount": "Number",
+            "section": "Number",
+            "positions": []
+        },
+        "hangingRod": {
+            "amount": "Number",
+            "section": "Number",
+            "positions": []
+        },
+        "drawers": {
+            "amount": "Number",
+            "section": "Number",
+            "positions": []
+        },
+        "drawerHandles": {
+            "itemNumber": "Number",
+            "amount": { "type": "Number" },
+            "color": "String",
+            "style": "String",
+            "img": "String"
+        }
+    },
+    "exteriorStyle": {
+        "material": { "type": "String", "required": true },
+        "doors": { "amount": "Number" },
+        "size": { "height": "Number", "width": "Number", "depth": "Number" },
+        "color": { "type": "String", "required": true },
+        "handles": {
+            "itemNumber": "Number",
+            "color": "String",
+            "style": "String",
+            "img": "String",
+            "amount": { "type": "Number", "default": "0" }
+        },
+        "base": {
+            "type": "String",
+            "default": "legs",
+            "enum": ["legs", "tzokel"]
+        }
+    },
+    "total": {
+        "type": "Number"
+    },
+    "isActive": {
+        "type": "Boolean",
+        "default": true
+    }
+}
+
+
+

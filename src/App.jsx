@@ -6,16 +6,16 @@ import Leyaot from './Leyaot'
 
 
 function App() {
- const [Likes, setLikes] = useState([])
+  const [Likes, setLikes] = useState([])
 
 
   return (
     <div>
-    
-<LikeContext.Provider value={{Likes , setLikes }} >
-      <Leyaot/>
+
+      <LikeContext.Provider value={{ Likes, setLikes }} >
+        <Leyaot />
       </LikeContext.Provider>
-  
+
     </div>
   )
 }

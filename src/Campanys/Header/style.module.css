@@ -21,3 +21,10 @@
     position: absolute;
     width: 20%;
   }
+  .user{
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    top: 0;
+    right: 0;
+  }
