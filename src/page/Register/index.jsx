@@ -11,34 +11,36 @@ function Registration() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
+  const [message, setMassage] = useState(false)
   const navigate = useNavigate()
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (confirmpassword === password) {
-      const url = "/users/register"
-      const data = {
-        name: username,
-        email: email,
-        password: password,
-      }
-      const result = await api.post(url, data)
-      if (result) {
-        // localStorage.setItem('token', result.token);
-        navigate('/login');
-      } else {
-        // setMassage('שם משתמש או סיסמא הינם תקינים');
-        // setTimeout(() => {
-        //       setMassage(false)
-        //     }, 10000)
-        console.log("qqqq");
-        return false;
-        // alert('💥💥💥💥💥')
-      }
-    }
+      try{
+        const url = "/users/register"
+        const data = {
+          name: username,
+          email: email,
+          password: password,
+        }
+        const result = await api.post(url, data)
+        if (result) {
+          // localStorage.setItem('token', result.token);
+          navigate('/login');
+        }}
+        catch (error) {
+          setMassage('This email address already exists...')
+          setTimeout(() => {
+            setMassage(false)
+          }, 10000)
+        }}
     else{
-      console.log("אימות סיסמא שגוי");
+      setMassage('Invalid password verification')
+          setTimeout(() => {
+            setMassage(false)
+          }, 10000)
     }
 
 
@@ -114,6 +116,9 @@ function Registration() {
         </div>
         <button type="submit" className={styles.btn_register}>Register</button>
       </form>
+      <div className={styles.message}>
+          {message}
+        </div>
     </div>
   );
 };

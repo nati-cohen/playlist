@@ -32,7 +32,6 @@ async function apiCalls(method, url, data) {
     });
     return res.data;
   } catch (error) {
-    console.log (error)
     throw error;
   }
 }

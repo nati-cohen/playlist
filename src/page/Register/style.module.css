@@ -48,6 +48,12 @@
 .btn_register:hover {
   background-color:rgb(66 83 90 / 88%);
 }
-
+.message{
+  font-size: large;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+  color: red;
+}
   
  

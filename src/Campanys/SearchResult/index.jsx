@@ -54,6 +54,7 @@ export default function SearchResult() {
     {songNow && (
         <SongPlay
           videoId={songNow}
+          songs ={songs}
         />)}
         </div>
      

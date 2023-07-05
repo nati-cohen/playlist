@@ -13,10 +13,12 @@ import YouTube from "react-youtube";
 import { BiVolumeFull, BiVolumeMute, BiMinusCircle ,BiPlusCircle } from "react-icons/bi";
 import { LuScreenShare} from "react-icons/lu";
  
-function SongPlay({ videoId }) {
+function SongPlay({ videoId, songs }) {
   const playerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);  //useState(false);
   const [isPresented, setIsPresented] = useState(false);
+
+ 
 
   const opts = {
     height: "160",
@@ -119,6 +121,23 @@ const decreaseVolume = () => {
   }
 };
 
+////
+  // Seek forward by 5 seconds
+  const seekForward = () => {
+    if (playerRef.current) {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(currentTime + 5, true);
+    }
+  };
+
+  // Seek backward by 5 seconds
+  const seekBackward = () => {
+    if (playerRef.current) {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(currentTime - 5, true);
+    }
+  };
+////
 
   return (
     <>
@@ -134,8 +153,8 @@ const decreaseVolume = () => {
           <BiMinusCircle onClick={decreaseVolume}/>
           </div>
            <div className={styles.play}>
-          <TfiControlBackward />
-          <TfiControlSkipBackward />
+          <TfiControlBackward onClick={seekBackward}/>
+          <TfiControlSkipBackward  />
           
           {isPlaying ? (
             <TfiControlPause onClick={handlePause}    />
@@ -143,7 +162,7 @@ const decreaseVolume = () => {
               <TfiControlPlay onClick={handlePlay} />
               )}
           <TfiControlSkipForward />
-          <TfiControlForward />
+          <TfiControlForward onClick={seekForward} />
           <TfiControlShuffle />
           </div>
               <LuScreenShare onClick={Presented} />
