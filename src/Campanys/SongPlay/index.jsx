@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./style.module.css";
 import {
   TfiControlBackward,
@@ -12,11 +12,15 @@ import {
 import YouTube from "react-youtube";
 import { BiVolumeFull, BiVolumeMute, BiMinusCircle ,BiPlusCircle } from "react-icons/bi";
 import { LuScreenShare} from "react-icons/lu";
+import SongNowContext from "../../Context/SongNowContext";
+
  
 function SongPlay({ videoId, songs }) {
   const playerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);  //useState(false);
   const [isPresented, setIsPresented] = useState(false);
+  const {songNow , setSongNow} = useContext(SongNowContext)
+
 
  
 
@@ -139,6 +143,41 @@ const decreaseVolume = () => {
   };
 ////
 
+
+const handleSkipForward = () => {
+  const currentIndex = songs.findIndex((song) => song.thumbnail.id === videoId);
+  const nextIndex = currentIndex + 1;
+  if (nextIndex < songs.length) {
+    const nextVideoId = songs[nextIndex].thumbnail.id;
+    setSongNow(nextVideoId);
+  }
+};
+const handleSkipBackwards = () => {
+  const currentIndex = songs.findIndex((song) => song.thumbnail.id === videoId);
+  const nextIndex = currentIndex - 1;
+  if (nextIndex < songs.length) {
+    const nextVideoId = songs[nextIndex].thumbnail.id;
+    setSongNow(nextVideoId);
+  }
+};
+
+const handleShuffle = () => {
+  const randomIndex = Math.floor(Math.random() * songs.length);
+  const randomVideoId = songs[randomIndex].thumbnail.id;
+  setSongNow(randomVideoId);
+};
+
+
+// const handleShuffle = () => {
+//   const shuffledSongs = [...songs];
+//   for (let i = shuffledSongs.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [shuffledSongs[i], shuffledSongs[j]] = [shuffledSongs[j], shuffledSongs[i]];
+//   }
+//   setSongNow(shuffledSongs[0].thumbnail.id);
+// };
+
+
   return (
     <>
       <div className={styles.box}>
@@ -154,16 +193,16 @@ const decreaseVolume = () => {
           </div>
            <div className={styles.play}>
           <TfiControlBackward onClick={seekBackward}/>
-          <TfiControlSkipBackward  />
+          <TfiControlSkipBackward onClick={handleSkipForward} />
           
           {isPlaying ? (
             <TfiControlPause onClick={handlePause}    />
             ) : (
               <TfiControlPlay onClick={handlePlay} />
               )}
-          <TfiControlSkipForward />
+          <TfiControlSkipForward onClick={handleSkipBackwards}/>
           <TfiControlForward onClick={seekForward} />
-          <TfiControlShuffle />
+          <TfiControlShuffle onClick={handleShuffle}/>
           </div>
               <LuScreenShare onClick={Presented} />
         </div>
