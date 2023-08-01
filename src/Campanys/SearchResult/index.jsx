@@ -21,7 +21,7 @@ export default function SearchResult() {
         method: "GET",
         url: "https://simple-youtube-search.p.rapidapi.com/search",
         params: {
-          query: search || "ישי+ריבו",
+          query: search || "חנן+בן+ארי",
           // query: search ,
           safesearch: "true",
         },

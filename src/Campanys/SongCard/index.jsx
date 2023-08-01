@@ -4,6 +4,8 @@ import SongPlay from "../SongPlay";
 import SongNowContext from "../../Context/SongNowContext";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import LikeContext from "../../Context/LikeContext";
+import axios from "axios";
+
 
 export default function SongCard({ song }) {
   const [currentSong, setCurrentSong] = useState(null);
@@ -20,16 +22,81 @@ export default function SongCard({ song }) {
 
   // };
 
-  const handleLikeClick = (song) => {
-    setIsLiked((prevIsLiked) => !prevIsLiked);
-
-    const updatedLikes = isLiked
-      ? Likes.filter((favSong) => favSong.id !== song.id)
-      : [...Likes, song];
-
-    setLikes(updatedLikes);
-    console.log(Likes);
+  const addToFavorite = async (song) => {
+    const token = localStorage.getItem("token");
+  
+    if (!token) {
+      console.log("User not logged in.");
+      return;
+    }
+  
+    try {
+      await axios.post(
+        "http://localhost:5001/api/favorite/addsong",
+        { song },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Song added to favorites successfully.");
+    } catch (error) {
+      console.log("Error adding song to favorites:", error);
+    }
   };
+
+
+  const removeFromFavorite = async (songId) => {
+    const token = localStorage.getItem("token");
+  
+    if (!token) {
+      console.log("User not logged in.");
+      return;
+    }
+  
+    try {
+      await axios.post(
+        "http://localhost:5001/api/favorite/removesong",
+        { songId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Song removed from favorites successfully.");
+    } catch (error) {
+      console.log("Error removing song from favorites:", error);
+    }
+  };
+  
+
+  const handleLikeClick = (song) => {
+    // If the user is logged in (token exists), add the song to favorites
+    if(!isLiked){
+      if (localStorage.getItem("token")) {
+        addToFavorite(song);
+      }
+    }
+    if(isLiked){
+      if (localStorage.getItem("token")) {
+  removeFromFavorite(song);
+      }
+    }
+    setIsLiked((prevIsLiked) => !prevIsLiked);
+  };
+  
+  // const handleLikeClick = (song) => {
+  //   setIsLiked((prevIsLiked) => !prevIsLiked);
+
+  //   const updatedLikes = isLiked
+  //     ? Likes.filter((favSong) => favSong.id !== song.id)
+  //     : [...Likes, song];
+
+  //   setLikes(updatedLikes);
+  //   console.log(Likes);
+  // };
 
   // useEffect(() => {
   //   console.log(Likes);

@@ -23,7 +23,7 @@ function Login() {
       const data = { email, password }
       const result = await api.post(url, data)
       if (result.token) {
-        localStorage.setItem(`token:${result.email}`, result.token);
+        localStorage.setItem(`token`, result.token);
         navigate('/');
       }
     }

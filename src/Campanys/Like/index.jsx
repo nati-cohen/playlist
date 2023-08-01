@@ -10,6 +10,7 @@ import SongPlay from '../SongPlay';
 function Like() {
   const { Likes, setLikes } = useContext(LikeContext);
   const { songNow, setSongNow } = useContext(SongNowContext)
+  
   console.log(Likes, songNow);
   return (
 
