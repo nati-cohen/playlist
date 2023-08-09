@@ -12,6 +12,7 @@ import SongContext from '../Context/SongContext'
 import SongNowContext from '../Context/SongNowContext'
 import Login from '../page/Login'
 import Registration from '../page/Register'
+import FavoriteSongs from '../Campanys/FavoriteSongs'
 // import MassageContext from '../Context/MassageContext'
 
 
@@ -39,6 +40,7 @@ function Leyaot() {
                 <Route path="/" element={<Home />} />
                 <Route path="/Home" element={<Home />} />
                 <Route path="/LikeSongs" element={<LikeSongs />} />
+                {/* <Route path="/LikeSongs" element={<FavoriteSongs />} /> */}
                 <Route path="/Playlists" element={<Playlists />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/Register" element={<Registration />} />

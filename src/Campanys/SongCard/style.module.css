@@ -6,7 +6,6 @@
    height: auto;
    cursor: context-menu;
 
-  
  }
  
  .playButton{
@@ -21,6 +20,7 @@
  .img{
    border-radius: 15px;
    z-index: 1;
+   cursor: pointer;
  }
  .title{
   text-align: center;
@@ -35,5 +35,6 @@
  right: 3%;
  top: 3%;
  color: brown;
+ cursor: pointer;
  
  }

@@ -183,28 +183,28 @@ const handleShuffle = () => {
       <div className={styles.box}>
         <div className={styles.button}>
           <div className={styles.volume}>
-          <BiPlusCircle onClick={increaseVolume}/>
+          <BiPlusCircle onClick={increaseVolume} className={styles.child}/>
           {isMuted ? (
-            < BiVolumeMute onClick={unmuteVolume} />
+            < BiVolumeMute onClick={unmuteVolume} className={styles.child}/>
           ) : (
-            <BiVolumeFull onClick={muteVolume} />
+            <BiVolumeFull onClick={muteVolume} className={styles.child}/>
           )}
-          <BiMinusCircle onClick={decreaseVolume}/>
+          <BiMinusCircle onClick={decreaseVolume} className={styles.child}/>
           </div>
            <div className={styles.play}>
-          <TfiControlBackward onClick={seekBackward}/>
-          <TfiControlSkipBackward onClick={handleSkipForward} />
+          <TfiControlBackward onClick={seekBackward} className={styles.child}/>
+          <TfiControlSkipBackward onClick={handleSkipForward} className={styles.child} />
           
           {isPlaying ? (
-            <TfiControlPause onClick={handlePause}    />
+            <TfiControlPause onClick={handlePause} className={styles.child}   />
             ) : (
-              <TfiControlPlay onClick={handlePlay} />
+              <TfiControlPlay onClick={handlePlay} className={styles.child} />
               )}
-          <TfiControlSkipForward onClick={handleSkipBackwards}/>
-          <TfiControlForward onClick={seekForward} />
-          <TfiControlShuffle onClick={handleShuffle}/>
+          <TfiControlSkipForward onClick={handleSkipBackwards} className={styles.child}/>
+          <TfiControlForward onClick={seekForward} className={styles.child}/>
+          <TfiControlShuffle onClick={handleShuffle} className={styles.child}/>
           </div>
-              <LuScreenShare onClick={Presented} />
+              <LuScreenShare onClick={Presented} className={styles.child}/>
         </div>
       </div>
      

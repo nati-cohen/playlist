@@ -7,12 +7,13 @@ import LikeContext from "../../Context/LikeContext";
 import axios from "axios";
 
 
-export default function SongCard({ song }) {
+export default function SongCard({ song ,isFavorite }) {
   const [currentSong, setCurrentSong] = useState(null);
   const { songNow, setSongNow } = useContext(SongNowContext);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(isFavorite);
   const { Likes, setLikes } = useContext(LikeContext);
 
+  // setIsLiked(isicon)
   const handlePlay = (song) => {
     setSongNow(song.thumbnail.id);
   };
@@ -74,7 +75,7 @@ export default function SongCard({ song }) {
 
   const handleLikeClick = (song) => {
     // If the user is logged in (token exists), add the song to favorites
-    if(!isLiked){
+    if(!isLiked ){
       if (localStorage.getItem("token")) {
         addToFavorite(song);
       }
@@ -85,6 +86,7 @@ export default function SongCard({ song }) {
       }
     }
     setIsLiked((prevIsLiked) => !prevIsLiked);
+    
   };
   
   // const handleLikeClick = (song) => {

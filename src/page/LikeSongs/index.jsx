@@ -1,5 +1,6 @@
 import React from 'react'
-import Like from '../../Campanys/like'
+import FavoriteSongs from '../../Campanys/FavoriteSongs'
+import styles from "./style.module.css";
 
 
 
@@ -7,8 +8,7 @@ function LikeSongs() {
 
   return (
     <div>
-
-        <Like/>
+        <FavoriteSongs/>
     </div>
   )
 }

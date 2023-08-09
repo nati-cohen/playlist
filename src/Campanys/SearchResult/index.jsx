@@ -48,7 +48,7 @@ export default function SearchResult() {
   return (
     <>
     <div className={styles.songsContinuer}>
-      {Array.isArray(songs) && songs.map((song) => <SongCard song={song} key={song.thumbnail.id}/>)}
+      {Array.isArray(songs) && songs.map((song) => <SongCard song={song} key={song.thumbnail.id} isFavorite={false}/>)}
     </div>
     <div>
     {songNow && (

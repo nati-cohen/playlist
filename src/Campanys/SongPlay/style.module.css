@@ -22,6 +22,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-around;
+    
    
 }
 .img{
@@ -44,4 +45,7 @@
 .play{
     display: flex;
     gap: 2rem;
+}
+.child{
+    cursor: pointer;
 }
