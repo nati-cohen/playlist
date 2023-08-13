@@ -14,7 +14,8 @@ function FavoriteSongs() {
 
   useEffect(() => {
     fetchFavoriteSongs();
-  }, [favoriteSongs]);
+  }, []);
+  // }, [favoriteSongs]);    זה ידאג שהשיר יוסר מיידת אך גורם להמון לרינדור אין סופי...
 
   async function fetchFavoriteSongs() {
     const token = localStorage.getItem("token");

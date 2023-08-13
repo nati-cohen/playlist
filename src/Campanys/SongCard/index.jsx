@@ -3,21 +3,27 @@ import styles from "./style.module.css";
 import SongPlay from "../SongPlay";
 import SongNowContext from "../../Context/SongNowContext";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { GrAddCircle } from "react-icons/gr";
 import LikeContext from "../../Context/LikeContext";
 import axios from "axios";
+import CreatePlaylistPopup from "../CreatePlaylistPopup";
 
 
-export default function SongCard({ song ,isFavorite }) {
+export default function SongCard({ song, isFavorite }) {
   const [currentSong, setCurrentSong] = useState(null);
   const { songNow, setSongNow } = useContext(SongNowContext);
   const [isLiked, setIsLiked] = useState(isFavorite);
   const { Likes, setLikes } = useContext(LikeContext);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // setIsLiked(isicon)
   const handlePlay = (song) => {
     setSongNow(song.thumbnail.id);
   };
 
+  const togglePopup = () => {
+    setIsPopupOpen(!isPopupOpen);
+  };
   // const handleLikeClick = () => {
   //   setIsLiked((prevIsLiked) => !prevIsLiked);
 
@@ -25,12 +31,12 @@ export default function SongCard({ song ,isFavorite }) {
 
   const addToFavorite = async (song) => {
     const token = localStorage.getItem("token");
-  
+
     if (!token) {
       console.log("User not logged in.");
       return;
     }
-  
+
     try {
       await axios.post(
         "http://localhost:5001/api/favorite/addsong",
@@ -50,12 +56,12 @@ export default function SongCard({ song ,isFavorite }) {
 
   const removeFromFavorite = async (songId) => {
     const token = localStorage.getItem("token");
-  
+
     if (!token) {
       console.log("User not logged in.");
       return;
     }
-  
+
     try {
       await axios.post(
         "http://localhost:5001/api/favorite/removesong",
@@ -71,24 +77,51 @@ export default function SongCard({ song ,isFavorite }) {
       console.log("Error removing song from favorites:", error);
     }
   };
-  
+
 
   const handleLikeClick = (song) => {
     // If the user is logged in (token exists), add the song to favorites
-    if(!isLiked ){
+    if (!isLiked) {
       if (localStorage.getItem("token")) {
         addToFavorite(song);
       }
     }
-    if(isLiked){
+    if (isLiked) {
       if (localStorage.getItem("token")) {
-  removeFromFavorite(song);
+        removeFromFavorite(song);
       }
     }
     setIsLiked((prevIsLiked) => !prevIsLiked);
-    
+
   };
+
+
+  const addSongPlaylist = async (song, playlistName) => {
+    console.log(playlistName);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("User not logged in");
+      return;
+    }
+    
+    try {
+      await axios.post(
+        "http://localhost:5001/api/playlist/create",
+        { song, playlistName }, // שלח גם את שם הפלייליסט
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Song added to playlist successfully.");
+    } catch (error) {
+      console.log("Error adding song to playlist:", error);
+    }
+  }
   
+
+
   // const handleLikeClick = (song) => {
   //   setIsLiked((prevIsLiked) => !prevIsLiked);
 
@@ -116,11 +149,20 @@ export default function SongCard({ song ,isFavorite }) {
   return (
     <>
       <div className={styles.songContainer}>
-        <div onClick={() => handleLikeClick(song)}>
-          {isLiked ? (
-            <AiFillHeart className={styles.like} />
-          ) : (
-            <AiOutlineHeart className={styles.like} />
+      <div>
+          <div onClick={() => handleLikeClick(song)}>
+            {isLiked ? (
+              <AiFillHeart className={styles.like} />
+            ) : (
+              <AiOutlineHeart className={styles.like} />
+            )}
+          </div>
+          <GrAddCircle className={styles.add} onClick={togglePopup} />
+          {isPopupOpen && (
+            <CreatePlaylistPopup
+              onClose={togglePopup}
+              onSave={(playlistName) => addSongPlaylist(song, playlistName)}
+            />
           )}
         </div>
         <img

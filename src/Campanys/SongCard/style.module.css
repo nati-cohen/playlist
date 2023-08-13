@@ -36,5 +36,26 @@
  top: 3%;
  color: brown;
  cursor: pointer;
- 
+ transition: transform 0.3s;
  }
+/* .like:hover{
+  height: 20%;
+  width: 20%;
+  transform: rotate(360deg);
+} */
+
+
+ .add{
+  height: 13%;
+  width: 13%;
+  z-index: 3;
+  position: absolute;
+ left: 3%;
+ top: 3%;
+ cursor: pointer;
+ transition: transform 0.3s;
+ }
+ .add:hover {
+  transform: rotate(135deg);
+  color: aliceblue;
+}
