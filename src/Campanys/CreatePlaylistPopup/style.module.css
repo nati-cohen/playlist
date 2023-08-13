@@ -1,0 +1,43 @@
+.createPlaylistPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .createPlaylistPopup h2 {
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+  }
+  
+  .createPlaylistPopup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .createPlaylistPopup button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .createPlaylistPopup button:not(:last-child) {
+    margin-right: 10px;
+  }
+  
+  .createPlaylistPopup button:hover {
+    background-color: #0056b3;
+  }
+  
