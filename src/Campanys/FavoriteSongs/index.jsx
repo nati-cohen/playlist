@@ -35,7 +35,6 @@ function FavoriteSongs() {
         }
       );
       setFavoriteSongs(response.data.favoriteSongs);
-     
     } catch (error) {
       console.log("Error fetching favorite songs:", error);
     }

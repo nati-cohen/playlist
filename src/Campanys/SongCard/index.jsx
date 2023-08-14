@@ -15,6 +15,28 @@ export default function SongCard({ song, isFavorite }) {
   const [isLiked, setIsLiked] = useState(isFavorite);
   const { Likes, setLikes } = useContext(LikeContext);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [playlists, setPlaylists] = useState([]);
+
+
+
+  const loadPlaylists = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('User not logged in');
+      return;
+    }
+    
+    try {
+      const response = await axios.get('http://localhost:5001/api/playlist/userplaylists', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPlaylists(response.data.playlistSongs);
+    } catch (error) {
+      console.log('Error loading playlists:', error);
+    }
+  };
 
   // setIsLiked(isicon)
   const handlePlay = (song) => {
@@ -146,6 +168,13 @@ export default function SongCard({ song, isFavorite }) {
 
   if (!song) return null;
 
+
+
+    const ShowPlaylist = async () => {
+    await loadPlaylists();
+    togglePopup();
+  };
+  
   return (
     <>
       <div className={styles.songContainer}>
@@ -157,11 +186,16 @@ export default function SongCard({ song, isFavorite }) {
               <AiOutlineHeart className={styles.like} />
             )}
           </div>
-          <GrAddCircle className={styles.add} onClick={togglePopup} />
+          <GrAddCircle className={styles.add} onClick={ShowPlaylist} />
           {isPopupOpen && (
             <CreatePlaylistPopup
               onClose={togglePopup}
               onSave={(playlistName) => addSongPlaylist(song, playlistName)}
+              playlists={playlists}
+              song={song}
+
+            
+              
             />
           )}
         </div>
