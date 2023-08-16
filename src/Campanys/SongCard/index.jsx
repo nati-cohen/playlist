@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import styles from "./style.module.css";
 import SongPlay from "../SongPlay";
 import SongNowContext from "../../Context/SongNowContext";
@@ -25,7 +25,7 @@ export default function SongCard({ song, isFavorite }) {
       console.log('User not logged in');
       return;
     }
-    
+
     try {
       const response = await axios.get('http://localhost:5001/api/playlist/userplaylists', {
         headers: {
@@ -125,7 +125,7 @@ export default function SongCard({ song, isFavorite }) {
       console.log("User not logged in");
       return;
     }
-    
+
     try {
       await axios.post(
         "http://localhost:5001/api/playlist/create",
@@ -141,7 +141,7 @@ export default function SongCard({ song, isFavorite }) {
       console.log("Error adding song to playlist:", error);
     }
   }
-  
+
 
 
   // const handleLikeClick = (song) => {
@@ -170,15 +170,15 @@ export default function SongCard({ song, isFavorite }) {
 
 
 
-    const ShowPlaylist = async () => {
+  const ShowPlaylist = async () => {
     await loadPlaylists();
     togglePopup();
   };
-  
+
   return (
     <>
       <div className={styles.songContainer}>
-      <div>
+        <div>
           <div onClick={() => handleLikeClick(song)}>
             {isLiked ? (
               <AiFillHeart className={styles.like} />
@@ -186,7 +186,10 @@ export default function SongCard({ song, isFavorite }) {
               <AiOutlineHeart className={styles.like} />
             )}
           </div>
-          <GrAddCircle className={styles.add} onClick={ShowPlaylist} />
+          <GrAddCircle 
+          className={styles.add} 
+          onClick={ShowPlaylist}
+           />
           {isPopupOpen && (
             <CreatePlaylistPopup
               onClose={togglePopup}
@@ -194,8 +197,8 @@ export default function SongCard({ song, isFavorite }) {
               playlists={playlists}
               song={song}
 
-            
-              
+
+
             />
           )}
         </div>

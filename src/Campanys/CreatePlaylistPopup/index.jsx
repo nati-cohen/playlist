@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AiFillCloseCircle } from "react-icons/ai";
 
 
-function CreatePlaylistPopup({ onClose, onSave , playlists,song }) {
+function CreatePlaylistPopup({ onClose, onSave , playlists,song}) {
   const [playlistName, setPlaylistName] = useState('');
 
   const handleSave = () => {
@@ -31,19 +31,23 @@ function CreatePlaylistPopup({ onClose, onSave , playlists,song }) {
         }
       );
       console.log("Song added to playlist successfully.");
+      onClose()
     } catch (error) {
       console.log("Error adding song to playlist:", error);
     }
   }
   return (
     <div className={styles.createPlaylistPopup}> 
-    <AiFillCloseCircle onClick={onClose}/>
-    <h3>Existing playlists:</h3>
+    <AiFillCloseCircle onClick={onClose} className={styles.close}/>
+    {(playlists.length > 0)?
+    <h5>Existing playlists:</h5>:<h3>No playlists found</h3>
+    }
           <ul>
           {playlists?.map((playlist) => (
             <li
               key={playlist._id}
               onClick={()=>addSongPlaylist(song, playlist._id )}
+              className={styles.list}
             >
 
               {playlist.name}
@@ -51,7 +55,7 @@ function CreatePlaylistPopup({ onClose, onSave , playlists,song }) {
           ))}
         </ul>
 
-      <h3>Create Playlist</h3>
+      <h5>Create Playlist</h5>
       <input
         type="text"
         value={playlistName}
