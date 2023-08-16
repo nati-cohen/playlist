@@ -1,0 +1,41 @@
+.plalistContinuer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    left: 21%;
+    top: 13%;
+    max-width: 80%;
+    gap: 1rem;
+   padding-top: 6%; 
+   justify-content: center;
+  }
+
+
+  
+  .playlistItems {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+  }
+  
+  .playlistItem {
+    padding: 10px;
+    margin: 0 20px ;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .playlistItem:hover {
+    background-color: #e8e8e8;
+  }
+  
+  .songsContinuer {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    gap: 1rem;
+   justify-content: center;
+  }
