@@ -42,7 +42,7 @@ function FavoriteSongs() {
 
   return (<>
     <div className={styles.songsContinuer}>
-      {Array.isArray(favoriteSongs) && favoriteSongs.map((song) => <SongCard song={song} key={song.thumbnail.id} isFavorite={true}/>)}
+      {Array.isArray(favoriteSongs) && favoriteSongs.map((song) => <SongCard song={song} key={song.thumbnail.id} isFavorite={true} isPlaylist={true}/>)}
     </div>
     <div>
     {songNow && (

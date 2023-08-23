@@ -4,16 +4,19 @@ import axios from 'axios';
 import SongCard from '../SongCard';
 import SongNowContext from '../../Context/SongNowContext';
 import SongPlay from '../SongPlay';
-
+import { CgTrash } from "react-icons/cg";
 
 export default function PlaylistSongs() {
   const [playlists, setPlaylists] = useState([]);
   const [playlistSongs, setPlaylistSongs] = useState([]);
-  const {songNow , setSongNow} = useContext(SongNowContext)
+  const { songNow, setSongNow } = useContext(SongNowContext)
+  const [currentPlaylistId, setCurrentPlaylistId] = useState(null);
+  
 
   useEffect(() => {
     loadPlaylists();
   }, []);
+
 
 
   const loadPlaylists = async () => {
@@ -52,11 +55,35 @@ export default function PlaylistSongs() {
           },
         });
       setPlaylistSongs(response.data.playlistSongs);
+      setCurrentPlaylistId(playlistId);
     } catch (error) {
       console.log('Error loading playlists:', error);
     }
   };
 
+  const removePlaylist = async (playlistId) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.log("User not logged in.");
+      return;
+    }
+
+    try {
+      await axios.post(
+        "http://localhost:5001/api/playlist/removeplaylist",
+        {playlistId},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Song removed from favorites successfully.");
+    } catch (error) {
+      console.log("Error removing song from favorites:", error);
+    }
+  };
 
   return (
     <div className={styles.plalistContinuer}>
@@ -66,23 +93,33 @@ export default function PlaylistSongs() {
             key={playlist._id}
             className={styles.playlistItem}
             onClick={() => SongPlaylists(playlist._id)}>
-
+              <CgTrash
+              onClick={()=>removePlaylist(playlist._id)}
+              className={styles.remove}
+              />
             {playlist.name}
-
           </div>
         ))}
       </div>
 
       <div className={styles.songsContinuer}>
-        {playlistSongs?.map((song) => <SongCard song={song} key={song.thumbnail.id} />)}
+        {playlistSongs?.map((song) => (
+          <SongCard
+            key={song.thumbnail.id}
+            song={song}
+            isPlaylist={false}
+            playlistId={currentPlaylistId} 
+          />
+        ))}
+
       </div>
       <div>
-    {songNow && (
-        <SongPlay
-          videoId={songNow}
-          songs ={playlistSongs}
-        />)}
-        </div>
+        {songNow && (
+          <SongPlay
+            videoId={songNow}
+            songs={playlistSongs}
+          />)}
+      </div>
     </div>
   )
 }

@@ -3,13 +3,13 @@ import styles from "./style.module.css";
 import SongPlay from "../SongPlay";
 import SongNowContext from "../../Context/SongNowContext";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { GrAddCircle } from "react-icons/gr";
+import { CgRemove,CgAdd } from "react-icons/cg";
 import LikeContext from "../../Context/LikeContext";
 import axios from "axios";
 import CreatePlaylistPopup from "../CreatePlaylistPopup";
 
 
-export default function SongCard({ song, isFavorite }) {
+export default function SongCard({ song, isFavorite,isPlaylist,playlistId }) {
   const [currentSong, setCurrentSong] = useState(null);
   const { songNow, setSongNow } = useContext(SongNowContext);
   const [isLiked, setIsLiked] = useState(isFavorite);
@@ -142,6 +142,30 @@ export default function SongCard({ song, isFavorite }) {
     }
   }
 
+  
+  const removeSongToPlaylist = async (song ,playlistId) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      console.log("User not logged in.");
+      return;
+    }
+
+    try {
+      await axios.post(
+        "http://localhost:5001/api/playlist/removesong",
+        { song ,playlistId},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Song removed from playlist successfully.");
+    } catch (error) {
+      console.log("Error removing song from playlist:", error);
+    }
+  };
 
 
   // const handleLikeClick = (song) => {
@@ -186,7 +210,9 @@ export default function SongCard({ song, isFavorite }) {
               <AiOutlineHeart className={styles.like} />
             )}
           </div>
-          <GrAddCircle 
+          {isPlaylist?(
+          <div>
+          <CgAdd 
           className={styles.add} 
           onClick={ShowPlaylist}
            />
@@ -196,10 +222,16 @@ export default function SongCard({ song, isFavorite }) {
               onSave={(playlistName) => addSongPlaylist(song, playlistName)}
               playlists={playlists}
               song={song}
-
-
-
             />
+          )}
+          </div>
+          ):(
+            <div>
+              <CgRemove
+              className={styles.remove}
+              onClick={()=> removeSongToPlaylist(song,playlistId)}
+              />
+            </div>
           )}
         </div>
         <img

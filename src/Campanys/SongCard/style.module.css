@@ -59,3 +59,17 @@
   transform: rotate(135deg);
   color: aliceblue;
 }
+ .remove{
+  height: 13%;
+  width: 13%;
+  z-index: 3;
+  position: absolute;
+ left: 3%;
+ top: 3%;
+ cursor: pointer;
+ transition: transform 0.3s;
+ }
+ .remove:hover {
+  transform: rotate(180deg);
+  color: aliceblue;
+}
